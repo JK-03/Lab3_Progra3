@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -244,6 +244,9 @@
         <bold>false</bold>
        </font>
       </property>
+      <property name="maximum">
+       <double>99999999999.000000000000000</double>
+      </property>
      </widget>
      <widget class="QSpinBox" name="spb_Adicional">
       <property name="geometry">
@@ -258,6 +261,9 @@
        <font>
         <pointsize>20</pointsize>
        </font>
+      </property>
+      <property name="maximum">
+       <number>999</number>
       </property>
      </widget>
      <widget class="Line" name="line_2">
@@ -392,7 +398,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Agregar Producto</string>
+       <string>Eliminar Producto</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
