@@ -14,7 +14,6 @@ cframe::cframe(QWidget *parent)
     ui->setupUi(this);
 
     this->setWindowTitle("Laboratorio #3");
-
     ui->tabWidget->setCurrentIndex(0);
 }
 
@@ -23,6 +22,7 @@ cframe::~cframe()
     delete ui;
 }
 
+//MENÚ
 void cframe::on_pushButton_clicked()
 {
     std::string opcion = "";
@@ -52,65 +52,42 @@ void cframe::on_pushButton_clicked()
     }
 }
 
-//Funciones
-void cframe::mostrarProducto()
-{
-    inventario.mostrarInventario(ui->TE_ProductosLista);
-}
-
-void cframe::mostrarValorTotalInventario()
-{
-    double valorTotal = inventario.calcularValorInventario();
-    ui->TE_ProductosLista->clear();
-    ui->TE_ProductosLista->append("Valor Total del Inventario:");
-    ui->TE_ProductosLista->append(QString::number(valorTotal));
-}
-
-
-
-
-
-void cframe::on_pushButton_2_clicked()
-{
+//FUNCIONES
+void cframe::agregarProducto() {
     QString nombreProducto = ui->LE_Nombre->text();
     double precio = ui->spb_Precio->value();
     QString descripcion = ui->TE_Descripcion->toPlainText();
-    double descuento = ui->spb_Descuento->value();
-    int cantidad = ui->spb_Cantidad->value();
+    int adicional = ui->spb_Adicional->value();
 
+    int tipoProducto = ui->comboBox_Tipo->currentIndex();
     std::unique_ptr<Producto> producto;
 
-    if (descuento > 100) {
-        QMessageBox::warning(this, "Advertencia", "El descuento no puede ser mayor al 100%");
-        return;
-    }
-
-    if (descuento > 0) {
-        producto = std::make_unique<ProductoConDescuento>(nombreProducto.toStdString(), precio, descripcion.toStdString(), descuento);
-    } else {
-        bool ok;
-        if (descuento == 0) {
-            cantidad = QInputDialog::getInt(this, "Cantidad", "Ingrese la cantidad:", cantidad, 0, 10000, 1, &ok);
-            if (!ok) {
-                return;
-            }
+    if (tipoProducto == 0) {
+        if (adicional > 100) {
+            QMessageBox::warning(this, "Advertencia", "El descuento no puede ser mayor al 100%");
+            return;
         }
-
-        producto = std::make_unique<ProductoConStock>(nombreProducto.toStdString(), precio, descripcion.toStdString(), cantidad);
+        if (adicional > 0) {
+            producto = std::make_unique<ProductoConDescuento>(nombreProducto.toStdString(), precio, descripcion.toStdString(), adicional);
+        } else {
+            QMessageBox::warning(this, "Advertencia", "Para ProductoConDescuento el descuento debe ser mayor a 0.");
+            return;
+        }
+    } else if (tipoProducto == 1) {
+        producto = std::make_unique<ProductoConStock>(nombreProducto.toStdString(), precio, descripcion.toStdString(), adicional);
+    } else {
+        QMessageBox::warning(this, "Advertencia", "Tipo de producto no válido.");
+        return;
     }
 
     if (producto) {
         inventario.agregarProducto(std::move(producto));
-
         QMessageBox::information(this, "Éxito", "El producto se ha agregado exitosamente al inventario.");
-
         size_t tamano = inventario.obtenerTamanioInventario();
         qDebug() << "El tamaño del inventario es:" << tamano;
     }
 }
-
-void cframe::on_pushButton_3_clicked()
-{
+void cframe::eliminarProducto() {
     QString nombreProducto = ui->LE_NombreEliminar->text();
 
     if (!nombreProducto.isEmpty()) {
@@ -124,6 +101,30 @@ void cframe::on_pushButton_3_clicked()
     } else {
         QMessageBox::warning(this, "Advertencia", "Por favor, ingrese el nombre del producto a eliminar.");
     }
+}
+
+void cframe::mostrarProducto()
+{
+    inventario.mostrarInventario(ui->TE_ProductosLista);
+}
+
+void cframe::mostrarValorTotalInventario()
+{
+    double valorTotal = inventario.calcularValorInventario();
+
+    QMessageBox::information(this, "Valor Total del Inventario", "Valor Total del Inventario: " + QString::number(valorTotal));
+}
+
+
+//IMPLEMENTACIÓN FUNCIONES A BOTONES
+void cframe::on_pushButton_2_clicked()
+{
+    agregarProducto();
+}
+
+void cframe::on_pushButton_3_clicked()
+{
+    eliminarProducto();
 }
 
 

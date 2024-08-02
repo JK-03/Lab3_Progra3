@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -245,34 +245,12 @@
        </font>
       </property>
      </widget>
-     <widget class="QLabel" name="label_7">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>340</y>
-        <width>121</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>20</pointsize>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Cantidad:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QSpinBox" name="spb_Cantidad">
+     <widget class="QSpinBox" name="spb_Adicional">
       <property name="geometry">
        <rect>
         <x>180</x>
-        <y>340</y>
-        <width>181</width>
+        <y>320</y>
+        <width>151</width>
         <height>41</height>
        </rect>
       </property>
@@ -295,12 +273,38 @@
        <enum>Qt::Horizontal</enum>
       </property>
      </widget>
+     <widget class="QComboBox" name="comboBox_Tipo">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>260</y>
+        <width>161</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <item>
+       <property name="text">
+        <string>Descuento</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Cantidad</string>
+       </property>
+      </item>
+     </widget>
      <widget class="QLabel" name="label_6">
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>30</x>
         <y>270</y>
-        <width>121</width>
+        <width>131</width>
         <height>31</height>
        </rect>
       </property>
@@ -311,26 +315,10 @@
        </font>
       </property>
       <property name="text">
-       <string>Descuento:</string>
+       <string>Tipo de Dato:</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-     <widget class="QDoubleSpinBox" name="spb_Descuento">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>270</y>
-        <width>181</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>20</pointsize>
-        <bold>false</bold>
-       </font>
       </property>
      </widget>
     </widget>
@@ -432,7 +420,7 @@
     </widget>
     <widget class="QWidget" name="tab_4">
      <attribute name="title">
-      <string>Mostrar Producto</string>
+      <string>Inventario</string>
      </attribute>
      <widget class="QTextEdit" name="TE_ProductosLista">
       <property name="geometry">

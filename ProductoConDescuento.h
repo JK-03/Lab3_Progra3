@@ -22,7 +22,7 @@ public:
         textEdit->append(QString("Precio Original: %1").arg(precio));
         textEdit->append(QString("Descripción: %1").arg(QString::fromStdString(descripcion)));
         textEdit->append(QString("Descuento: %1%").arg(descuento));
-        textEdit->append(QString("Precio con Descuento: %1").arg(calcularValorTotal()));
+        textEdit->append(QString("Valor Total: %1").arg(calcularValorTotal()));
         textEdit->append("");
     }
 

@@ -35,16 +35,11 @@ public:
     void mostrarInventario(QTextEdit* textEdit) const {
         textEdit->clear();
 
-        QString contenido;
         for (const auto& producto : productos) {
-            contenido += "Nombre: " + QString::fromStdString(producto->getNombre()) + "\n";
-            contenido += "Precio: " + QString::number(producto->getPrecio()) + "\n";
-            contenido += "Descripción: " + QString::fromStdString(producto->getDescripcion()) + "\n";
-            contenido += "Valor Total: " + QString::number(producto->calcularValorTotal()) + "\n";
-            contenido += "----------------------------\n";
+            producto->mostrarInformacion(textEdit);
         }
-        textEdit->setPlainText(contenido);
     }
+
 
     double calcularValorInventario() const {
         double valorTotal = 0.0;
